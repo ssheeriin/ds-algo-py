@@ -169,14 +169,18 @@ class BST:
 
         successor_node = None
         if node.right():
-            successor_node = min(node.right())
+            successor_node = self.min_node(node.right())
         else:
 
-            p = node.parent()
-            while p.parent() and p == p.parent().left():
-                p = p.parent()
+            child = node
+            p = child.parent()
+            while p:
+                if p.right() != child:
+                    break
+                child = p
+                p = child.parent()
 
-            successor_node = p.parent()
+            successor_node = p
 
         return successor_node
 
@@ -216,3 +220,11 @@ class BST:
             ''' then copy the child to here and remove child'''
 
         return temp
+
+    def min_node(self, node):
+        prev = None
+        while node:
+            prev = node
+            node = node.left()
+
+        return prev
