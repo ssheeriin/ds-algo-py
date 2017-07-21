@@ -9,6 +9,7 @@ class DirectedGraph:
     def build_graph(self, pairs):
         self.__g = defaultdict(list)
         for node1, node2 in pairs:
+            # add the second one to adjacency list of first
             self.__g[node1].append(node2)
 
     def dfs(self, start_node):
@@ -56,8 +57,8 @@ class DirectedGraph:
         if vertex not in visited:
             result.append(vertex)
             visited.append(vertex)
-            for adj in self.__g[vertex]:
-                self._dfs_recursive(adj, visited, result)
+            for adjacent in self.__g[vertex]:
+                self._dfs_recursive(adjacent, visited, result)
 
 
 class UnDirectedGraph:
