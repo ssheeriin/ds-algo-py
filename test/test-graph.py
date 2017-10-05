@@ -64,6 +64,26 @@ class TestGraph(unittest.TestCase):
         self.assertEqual(len(expected), 9)
         self.assertEqual(expected.__str__(), [0, 1, 3, 5, 7, 2, 4, 6, 8].__str__())
 
+    def test_undirectedgraph_dfsWithLevelAndParent(self):
+        pairs = [(0, 1),
+                 (1, 3),
+                 (3, 5),
+                 (5, 7),
+                 (0, 2),
+                 (2, 4),
+                 (4, 6),
+                 (6, 8)
+                 ]
+        g = UnDirectedGraph()
+        g.build_graph(pairs)
+
+        expected = g.dfsWithLevelAndParent(0)
+        print(expected['level'])
+        print(expected['parent'])
+
+        self.assertEqual(len(expected['result']), 9)
+        self.assertEqual(expected['result'].__str__(), [0, 1, 2, 3, 4, 5, 6, 7, 8].__str__())
+
 
 if __name__ == '__main__':
     unittest.main()

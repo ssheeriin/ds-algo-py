@@ -102,6 +102,42 @@ class UnDirectedGraph:
             if data not in visited:
                 result.append(data)
                 visited.append(data)
-                for adj in self.__g[data]:
-                    list.append(adj)
+                '''add neighbors list to list. pythonian way to replace for loop and append'''
+                list.extend(self.__g[data])
+
         return result
+
+    def dfsWithLevelAndParent(self, s):
+        '''
+        BFS explores node level by level.
+        Once search finishes, level will have level of each node the the BFS.
+        Parent of V will have the node U which it came from during BFS
+        If we trace from V to its parent and to its parent and so on till end, we reach starting node, S.
+        This traced path will be one of the shortest paths from starting node S, to V
+        '''
+        list = []
+        visited = []
+        result = []
+        level = {}
+        parent = {s: None}
+        i = 1
+        if s in self.__g:
+            list.append(s)
+            level[s] = 0
+            result.append(s)
+            visited.append(s)
+
+        while list:
+            next = []
+            for u in list:
+                for v in self.__g[u]:
+                    if v not in visited:
+                        visited.append(v)
+                        result.append(v)
+                        level[v] = i
+                        parent[v] = u
+                        next.append(v)
+                list = next
+                i += 1
+
+        return {'result': result, 'level': level, 'parent': parent}

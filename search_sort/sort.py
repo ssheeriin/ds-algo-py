@@ -124,4 +124,13 @@ def _merge_sort(array, leftStart, rightEnd):
 
 
 def merge_sort(array):
+    '''
+     Algo:
+     1) Find middle element
+     2) sort first half
+     2) sort second half
+     3) Merge both halves
+    :param array:
+    :return:
+    '''
     _merge_sort(array, 0, len(array) - 1)
